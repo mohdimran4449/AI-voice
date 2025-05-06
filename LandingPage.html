@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Voice Assistant for Lead Qualification</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #0a2540;
+      --primary-hover: #061b30;
+      --background: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --light-bg: #f3f4f6;
+      --radius: 10px;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      --gradient: linear-gradient(135deg, #0a2540, #183153);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--background);
+      color: var(--text);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      text-align: center;
+      padding: 4rem 1rem 3rem;
+      background: var(--gradient);
+      color: white;
+      box-shadow: var(--shadow);
+      border-bottom: 4px solid var(--primary-hover);
+      animation: fadeIn 1s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    header h1 {
+      font-size: 2.75rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    header p {
+      font-size: 1.25rem;
+      max-width: 700px;
+      margin: 0 auto;
+      color: #d1d5db;
+    }
+
+    .section {
+      padding: 3rem 1rem;
+      max-width: 960px;
+      margin: 0 auto;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    .section h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .section h2::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: var(--primary-color);
+      margin: 0.5rem auto;
+      border-radius: 2px;
+    }
+
+    .steps li, .benefits li, .questions li {
+      background: var(--light-bg);
+      margin: 1rem 0;
+      padding: 1.25rem 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, background 0.3s ease;
+      position: relative;
+    }
+
+    .steps li:hover, .benefits li:hover, .questions li:hover {
+      transform: translateY(-4px);
+      background: #e5e7eb;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .cta {
+      text-align: center;
+      margin: 4rem 0 2rem;
+    }
+
+    .cta a {
+      display: inline-block;
+      margin: 0.75rem;
+      padding: 1rem 2.25rem;
+      background-color: var(--primary-color);
+      color: #fff;
+      border-radius: var(--radius);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      box-shadow: var(--shadow);
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .cta a:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-2px);
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--muted);
+      padding: 2rem 1rem;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      .section h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+    /* Customized Contact Us Section */
+    .contact-section {
+      background-color: #f9fafb;
+      border-radius: 8px;
+      padding: 2rem;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .contact-section h2 {
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+      font-size: 1.75rem;
+      font-weight: 700;
+    }
+
+    .contact-section p {
+      font-size: 1.2rem;
+      color: var(--muted);
+    }
+
+    .contact-section a {
+      font-weight: 600;
+      color: var(--primary-color);
+      text-decoration: none;
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      display: inline-block;
+    }
+
+    .contact-section a:hover {
+      text-decoration: underline;
+    }
+
+    /* Video Section Styling */
+    .video-container {
+      text-align: center;
+      margin: 4rem 0;
+    }
+
+    .video-container h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      position: relative;
+      font-weight: 700;
+    }
+
+    .video-container h2::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: var(--primary-color);
+      margin: 0.5rem auto;
+      border-radius: 2px;
+    }
+
+    .video-container iframe {
+      width: 80%; /* Adjust the width to your preference (e.g., 80% of the container) */
+      max-width: 800px; /* Limit the maximum width to prevent it from being too wide */
+      height: 450px; /* Set a fixed height for the video */
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+  /* Book a Demo Section and Modal Styling */
+    .demo-section {
+      text-align: center;
+      margin: 4rem 0;
+      padding: 2rem;
+      background-color: #f0f4f8;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    
+    .demo-section h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+    }
+    
+    .demo-section p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: var(--muted);
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .demo-button {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background-color: var(--primary-color);
+      color: white;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      border: none;
+    }
+    
+    .demo-button:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-2px);
+    }
+    
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .modal-content {
+      background-color: white;
+      padding: 2rem;
+      border-radius: var(--radius);
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+      position: relative;
+      animation: modalFadeIn 0.3s ease-out;
+    }
+    
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--muted);
+      transition: color 0.2s ease;
+    }
+    
+    .close-modal:hover {
+      color: var(--primary-color);
+    }
+    
+    .modal-title {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary-color);
+      text-align: center;
+    }
+    
+    /* Google Form iframe styling */
+    #googleForm {
+      border: none;
+      width: 100%;
+      height: 450px;
+      border-radius: var(--radius);
+    }
+    
+    .success-message {
+      display: none;
+      text-align: center;
+      padding: 1rem;
+      background-color: #d1fae5;
+      border-radius: var(--radius);
+      margin-top: 1rem;
+      color: #065f46;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Automate Lead Qualification with AI Voice Assistants</h1>
+    <p>Let AI handle the screening so you only talk to qualified prospects—across any industry.</p>
+  </header>
+
+  <!-- Moved Video Section Above "How It Works" -->
+  <section class="video-container">
+    <h2>Watch a Short Video</h2>
+    <!-- YouTube video embed -->
+    <iframe src="https://www.youtube.com/embed/jsJ8exNO07E" frameborder="0" allowfullscreen></iframe>
+  </section>
+
+  <section class="section">
+    <h2>How It Works</h2>
+    <ul class="steps">
+      <li>We set up a custom AI voice assistant tailored to your business.</li>
+      <li>It calls cold, warm, or inbound leads and asks your key screening questions.</li>
+      <li>The AI qualifies leads and books meetings directly on your calendar.</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>What It Can Ask</h2>
+    <ul class="questions">
+      <li>Personal background: name, age, location, occupation</li>
+      <li>Financial profile: income, budget, investable assets</li>
+      <li>Needs & goals: short-term and long-term objectives</li>
+      <li>Buying or investing timeline & urgency</li>
+      <li>Current solutions: existing providers or tools used</li>
+      <li>Pain points & challenges with current setup</li>
+      <li>Interest level, objections, and readiness to engage</li>
+      <li>Preferred contact method and availability</li>
+    </ul>
+  </section>
+
+  <section class="demo-section">
+    <h2>Book a Free Demo</h2>
+    <p>See how our AI voice assistant can transform your lead qualification process. Schedule a personalized demo today!</p>
+    <button class="demo-button" id="openDemoModal">Book a Demo</button>
+  </section>
+
+  <section class="contact-section">
+    <h2>Contact Us</h2>
+    <p>Email: <a href="mailto:letaispeak@gmail.com">letaispeak@gmail.com</a></p>
+    <p>Phone: <a href="tel:+919839044129"> +91-9839044129</a></p>
+  </section>
+  
+  <!-- Demo Modal -->
+  <div class="modal" id="demoModal">
+    <div class="modal-content">
+      <span class="close-modal" id="closeModal">&times;</span>
+      <h3 class="modal-title">Book Your Free Demo</h3>
+      <!-- Google Form embed -->
+      <iframe id="googleForm" src="https://docs.google.com/forms/d/e/1FAIpQLSdNAfNFxJdB5RR9nU4FCcnMVDwSmignawg-dL3HcDDYCcE2og/viewform?embedded=true" width="100%" height="450" frameborder="0" marginheight="0" marginwidth="0" style="display: block;">Loading…</iframe>
+      <div class="success-message" id="successMessage" style="display: none;">
+        <p>Demo booked! We'll reach out to you via email soon.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Modal functionality
+    const modal = document.getElementById('demoModal');
+    const openModalBtn = document.getElementById('openDemoModal');
+    const closeModalBtn = document.getElementById('closeModal');
+    const googleForm = document.getElementById('googleForm');
+    const successMessage = document.getElementById('successMessage');
+    
+    // Google Form URL
+    const googleFormURL = 'https://docs.google.com/forms/d/e/1FAIpQLSdNAfNFxJdB5RR9nU4FCcnMVDwSmignawg-dL3HcDDYCcE2og/viewform?embedded=true';
+    
+    // Set the Google Form URL when the page loads
+    googleForm.src = googleFormURL;
+    
+    // Listen for messages from the iframe (for form submission detection)
+    window.addEventListener('message', function(event) {
+      // Check if the message is from Google Forms
+      if (event.origin.includes('google.com') && event.data.includes('formResponse')) {
+        // Form was submitted successfully
+        googleForm.style.display = 'none';
+        successMessage.style.display = 'block';
+        
+        // Close modal after a delay
+        setTimeout(() => {
+          modal.style.display = 'none';
+          googleForm.style.display = 'block';
+          successMessage.style.display = 'none';
+          
+          // Reload the form to reset it
+          googleForm.src = googleFormURL;
+        }, 3000);
+      }
+    });
+    
+    openModalBtn.addEventListener('click', () => {
+      modal.style.display = 'flex';
+    });
+    
+    closeModalBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+      // Reset the form by reloading it
+      googleForm.src = googleFormURL;
+      successMessage.style.display = 'none';
+      googleForm.style.display = 'block';
+    });
+    
+    // Close modal when clicking outside the modal content
+    window.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+        // Reset the form by reloading it
+        googleForm.src = googleFormURL;
+        successMessage.style.display = 'none';
+        googleForm.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
